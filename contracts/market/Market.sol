@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0-only
-
 pragma solidity 0.6.12;
 
 import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol";
@@ -33,7 +31,7 @@ contract Market is IMarket, OwnableUpgradeSafe, Proxiable {
     /** @dev the collateral token that must be locked up in this contract until expiry or redemption */
     IERC20 public override collateralToken;
     /** @dev the token paid to exercise an option */
-    IERC20 public override paymentToken;
+    IERC20 public paymentToken;
     /** @dev the manner in which the options are redeemed */
     MarketStyle public marketStyle;
 

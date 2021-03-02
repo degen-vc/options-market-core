@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0-only
-
 pragma solidity 0.6.12;
 
 import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol";
@@ -78,8 +76,6 @@ interface IMarket {
     function expirationDate() external view returns (uint256);
 
     function collateralToken() external view returns (IERC20);
-
-    function paymentToken() external view returns (IERC20);
 
     function wToken() external view returns (ISimpleToken);
 

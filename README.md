@@ -5,7 +5,7 @@ sirenmarkets.com" width="600" style="border:none;"/>
   </a>
 </p>
 
-# SIREN Core Smart Contracts
+# Project Siren
 
 This repository contains the source code for the SIREN core smart contracts.
 
