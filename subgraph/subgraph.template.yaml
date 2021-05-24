@@ -4,7 +4,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: MarketsRegistry
-    network: {{network}}
+    network: chapel
     source:
       address: "{{marketsRegistryAddress}}"
       abi: MarketsRegistry
@@ -29,7 +29,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Market
-    network: {{network}}
+    network: chapel
     source:
       abi: Market
     mapping:
@@ -68,7 +68,7 @@ templates:
       file: ./src/mappings/market.ts
   - kind: ethereum/contract
     name: SimpleToken
-    network: {{network}}
+    network: chapel
     source:
       abi: SimpleToken
     mapping:
@@ -89,7 +89,7 @@ templates:
       file: ./src/mappings/simpleToken.ts
   - kind: ethereum/contract
     name: Amm
-    network: {{network}}
+    network: chapel
     source:
       abi: MinterAmm
     mapping:

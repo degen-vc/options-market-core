@@ -25,6 +25,7 @@ import { findOrCreateToken } from "./simpleToken"
 
 export function handleMarketInitialized(event: MarketInitialized): void {
   // Create Market
+  // Note: hardcode address?
   let market = new Market(event.address.toHexString())
   let contract = MarketContract.bind(event.address)
 

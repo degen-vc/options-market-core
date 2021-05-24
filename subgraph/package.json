@@ -6,13 +6,14 @@
     "codegen": "npm run prepare && graph codegen",
     "build": "npm run prepare && graph build",
     "prepare": "mustache ./config/${NETWORK:-local}.json subgraph.template.yaml > subgraph.yaml",
-    "deploy-remote": "npm run prepare && graph deploy sirenmarkets/${NAME:-null} --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "create-local": "npm run prepare && graph create --node http://localhost:8020/ sirenmarkets/protocol",
-    "remove-local": "graph remove --node http://localhost:8020/ sirenmarkets/protocol",
-    "deploy-local": "npm run prepare && graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sirenmarkets/protocol",
+    "deploy-remote": "npm run prepare && graph deploy username/sample --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "create-local": "npm run prepare && graph create --node http://localhost:8020/ username/sample",
+    "remove-local": "graph remove --node http://localhost:8020/ username/protocol",
+    "deploy-local": "npm run prepare && graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 username/protocol",
     "deploy-kovan": "NETWORK=kovan NAME=protocol-kovan-v2 npm run deploy-remote",
     "deploy-rinkeby": "NETWORK=rinkeby NAME=protocol-rinkeby npm run deploy-remote",
     "deploy-mainnet": "NETWORK=mainnet NAME=protocol npm run deploy-remote",
+    "deploy-chapel": "NETWORK=chapel npm run deploy-remote",
     "graph-auth": "graph auth https://api.thegraph.com/deploy/ --"
   },
   "dependencies": {

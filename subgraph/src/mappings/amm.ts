@@ -7,6 +7,7 @@ import { findOrCreateToken } from "./simpleToken"
 
 export function handleAMMInitialized(event: AMMInitialized): void {
   // create AMM
+  // Note: hardcode address?
   let amm = new Amm(event.address.toHexString())
   let contract = AmmContract.bind(event.address)
 
