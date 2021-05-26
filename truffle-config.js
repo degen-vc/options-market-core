@@ -1,19 +1,20 @@
 require("dotenv").config()
 
 const fs = require("fs")
+const { BSC_API_KEY } = process.env
 
-// Let the mnemonic fail if local development
-let mnemonic
+// Let the privateKey fail if local development
+let privateKey
 try {
   // ask a Siren dev to give you this file
-  mnemonic = fs.readFileSync(".secret").toString().trim()
+  privateKey = fs.readFileSync(".secret").toString().trim()
 } catch {
   console.log("ERROR: .secret file not found")
 }
 
-// if deploying for mainnet, require mnemonic
+// if deploying for mainnet, require privateKey
 if (!!process.env.DEPLOY_MAINNET) {
-  mnemonic = fs.readFileSync(".secret-mainnet").toString().trim()
+  privateKey = fs.readFileSync(".secret-mainnet").toString().trim()
 }
 
 const HDWalletProvider = require("@truffle/hdwallet-provider")
@@ -44,7 +45,7 @@ module.exports = {
     kovan: {
       provider: function () {
         return new HDWalletProvider(
-          mnemonic,
+          privateKey,
           `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
         )
       },
@@ -55,7 +56,7 @@ module.exports = {
     rinkeby: {
       provider: function () {
         return new HDWalletProvider(
-          mnemonic,
+          privateKey,
           `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
         )
       },
@@ -67,7 +68,7 @@ module.exports = {
     mainnet: {
       provider: function () {
         return new HDWalletProvider(
-          mnemonic,
+          privateKey,
           `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
         )
       },
@@ -75,6 +76,38 @@ module.exports = {
       gas: 8000000,
       gasPrice: 34000000000, // 34 gwei (this should be changed to match current average gas price whenever we use this provide)
       // check https://www.ethgasstation.info/
+    },
+
+    bscTestnet: {
+      provider: () =>
+        new HDWalletProvider(
+          privateKey,
+          `https://data-seed-prebsc-2-s2.binance.org:8545`,
+        ),
+      network_id: 97,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+
+    bsc: {
+      provider: () =>
+        new HDWalletProvider(privateKey, `https://bsc-dataseed1.binance.org`),
+      network_id: 56,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      gasPrice: 5000000000,
+      skipDryRun: true,
+    },
+
+    maticTestnet: {
+      provider: () =>
+        new HDWalletProvider(privateKey, `https://rpc-mumbai.matic.today`),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      gasPrice: 1000000000,
+      skipDryRun: true,
     },
     // Another network with more advanced options...
     // advanced: {
@@ -124,5 +157,11 @@ module.exports = {
         // evmVersion: "byzantium"
       },
     },
+  },
+
+  plugins: ["truffle-plugin-verify"],
+
+  api_keys: {
+    bscscan: BSC_API_KEY,
   },
 }
